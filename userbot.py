@@ -12,7 +12,7 @@ print("### JARVIS USERBOT v3 (MEDIA + BASE64 + FİLTRE) ###")
 api_id = 36281618
 api_hash = "10b562fdb21aea54e5eddf8e668957d5"
 
-WEBHOOK_URL = "https://n8n.kenanturkoz.cloud/webhook-test/jarvis-telegram"
+WEBHOOK_URL = "https://n8n.kenanturkoz.cloud/webhook/jarvis-telegram"
 
 SESSION_STRING = os.getenv("SESSION_STRING")
 
@@ -163,3 +163,4 @@ while True:
         print("⏳ 10 saniye sonra yeniden başlatılıyor...")
 
         time.sleep(10)
+
