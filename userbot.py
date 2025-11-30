@@ -1,9 +1,11 @@
 from telethon import TelegramClient, events
+from telethon.sessions import StringSession          # ← BUNU EKLE
 from telethon.tl.types import MessageMediaPhoto, MessageMediaDocument
 import time
 import requests
 import json
 import base64
+import os                                           # ← BUNU EKLE
 
 print("### JARVIS USERBOT v3 (MEDIA + BASE64 + FİLTRE) ###")
 
@@ -12,20 +14,20 @@ api_hash = "10b562fdb21aea54e5eddf8e668957d5"
 
 WEBHOOK_URL = "https://n8n.kenanturkoz.cloud/webhook-test/jarvis-telegram"
 
-ALLOWED_CHAT_IDS = [
-    -1003159248444, #BVI Grubu
-    7749345491,     #Necmettin DM
-    1254096186,     #Zehra
-    8544734996,     #Annem
-    -5026911621,    #TeacherPAL (isteğe bağlı)
-]
-
+SESSION_STRING = os.getenv("SESSION_STRING")
 
 def create_client():
-    return TelegramClient("kenan_session", api_id, api_hash)
+    return TelegramClient(StringSession(SESSION_STRING), api_id, api_hash)
 
+client = create_client()        # ← SADECE BU KALSIN
 
-client = create_client()
+ALLOWED_CHAT_IDS = [
+    -1003159248444,  # BVI Grubu
+    7749345491,      # Necmettin DM
+    1254096186,      # Zehra
+    8544734996,      # Annem
+    -5026911621,     # TeacherPAL (isteğe bağlı)
+]
 
 
 @client.on(events.NewMessage())
@@ -159,4 +161,5 @@ while True:
     except Exception as e:
         print(f"❌ Hata: {e}")
         print("⏳ 10 saniye sonra yeniden başlatılıyor...")
+
         time.sleep(10)
